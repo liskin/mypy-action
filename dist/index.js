@@ -939,6 +939,9 @@ async function run() {
     );
 
     const conclusion = numErrors > maxErrors ? "failure" : "success";
+    if (numErrors > maxErrors) {
+      core.setFailed(`There are ${numErrors} mypy errors`);
+    }
 
     await submitResult(octokit, checkName,conclusion, annotations);
   } catch (error) {
